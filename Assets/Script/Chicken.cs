@@ -6,7 +6,7 @@ public class Chicken : Animal
     public int Egg
     {
         get { return egg; }
-        set
+        private set
         {
             if (value < 0)
                 egg = 0;
@@ -31,7 +31,7 @@ public class Chicken : Animal
     {
         AdjustHunger(5);
         AdjustHappiness(20);
-        Debug.Log($"{Name} slept and feels a little hungry, but very happy!");
+    Debug.Log($"{Name} slept and feels a little hungry, but very happy!");
         GetStatus();
     }
 

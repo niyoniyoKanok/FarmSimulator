@@ -6,7 +6,7 @@ public class Cow : Animal
     public float Milk
     {
         get { return milk; }
-        set
+        private set
         {
             if (value < 0)
                 milk = 0;

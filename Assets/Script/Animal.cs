@@ -8,7 +8,7 @@ public abstract class Animal : MonoBehaviour
     public string Name
     {
         get { return name; }
-        set
+        private set
         {
             if (string.IsNullOrEmpty(value))
                 name = "Michael";
@@ -20,7 +20,7 @@ public abstract class Animal : MonoBehaviour
     public int Hunger
     {
         get { return hunger; }
-        set
+        private set
         {
             if (value < 0)
                 hunger = 0;
@@ -34,7 +34,7 @@ public abstract class Animal : MonoBehaviour
     public int Happiness
     {
         get { return happiness; }
-        set
+        private set
         {
             if (value < 0)
                 happiness = 0;
