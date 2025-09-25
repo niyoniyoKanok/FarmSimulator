@@ -37,6 +37,11 @@ public class Main : MonoBehaviour
         cow.GetStatus();
         cow.Moo();
         cow.Produce();
+        chicken.Sleep();
+        chicken.Produce();
+        penguin.AdjustHappiness(30);
+        penguin.GetStatus();
+        penguin.Produce();
 
 
         cow.Feed(FoodType.Hay, 10);
