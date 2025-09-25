@@ -16,10 +16,11 @@ public class Chicken : Animal
                 egg = value;
         }
     }
-    public void Init(string newName, int newHunger, int newHappiness,int newEgg)
+    public void Init(string newName)
     {
-        base.Init(newName,newHunger,newHappiness);
-        newEgg = 0;
+        base.Init(newName, Hunger,Happiness);
+        Egg = 0;
+        PreferredFood = FoodType.Grain;
     }
 
 
@@ -33,6 +34,15 @@ public class Chicken : Animal
         AdjustHappiness(20);
     Debug.Log($"{Name} slept and feels a little hungry, but very happy!");
         GetStatus();
+    }
+
+    public override void Produce()
+    {
+        if (Happiness >= 70)
+        {
+            Egg += 2;
+            Debug.Log($"{Name} laid {Egg} eggs, Total egg is {Egg}");
+        }
     }
 
 

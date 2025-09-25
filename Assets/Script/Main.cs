@@ -11,10 +11,10 @@ public class Main : MonoBehaviour
     public List<Animal> FarmAnimals = new List<Animal>();
     private void Start()
     {
-        cow.Init("Michael", 50, 10);
-        chicken.Init("Jackson", 40, 10);
-        penguin.Init("Penpen", 30, 10);
-        
+        cow.Init("Michael");
+        chicken.Init("Jackson");
+        penguin.Init("Penpen");
+
         FarmAnimals.Add(cow);
         FarmAnimals.Add(chicken);
         FarmAnimals.Add(penguin);
@@ -33,24 +33,23 @@ public class Main : MonoBehaviour
             animal.Feed(5);
         }
 
-        foreach (var animal in FarmAnimals)
-        {
-            Debug.Log("");
-            if (animal is Cow)
-            {
-                animal.Feed("Hay", 5);
-                cow.Moo();
-            }
-            else if (animal is Chicken)
-            {
-                animal.Feed("Corn", 3);
-                chicken.Sleep();
-            }
-            else if (animal is Penguin)
-            {
-                animal.Feed("Fish", 4);
-            }           
-        }
+        cow.Produce();
+        cow.GetStatus();
+        cow.Moo();
+        cow.Produce();
 
+
+        cow.Feed(FoodType.Hay, 10);
+        penguin.Feed(FoodType.Grain,10);
+        chicken.Feed(FoodType.Grain,10);
+        cow.AdjustHappiness(-1000);
+        cow.GetStatus();
+        cow.AdjustHappiness(+1000);
+        cow.GetStatus();
+
+        for (int i = 0; i < 3; i++)
+        {
+            penguin.Feed(FoodType.Fish, 10);
+        }
     }
 }

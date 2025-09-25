@@ -16,10 +16,11 @@ public class Cow : Animal
                 milk = value;
         }
     }
-    public void Init(string newName, int newHunger, int newHappiness,int newMilk)
+    public void Init(string newName)
     {
-        base.Init(newName, newHunger, newHappiness);
-        newMilk = 0;
+        base.Init(newName, Hunger, Happiness);
+        Milk = 0;
+        PreferredFood = FoodType.Hay;
     }
 
 
@@ -35,5 +36,15 @@ public class Cow : Animal
         Debug.Log($"{Name} gives a loud MooMooMoo, Current Happiness {Happiness}!");
         GetStatus();
 
+    }
+
+    public override void Produce()
+    {
+        if (Happiness >= 70)
+        {
+            Milk += 2;
+            
+            Debug.Log($"{Name} produces {Milk} liters of milk,Total milk is {Milk}");
+        }
     }
 }
