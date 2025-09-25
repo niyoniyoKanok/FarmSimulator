@@ -29,13 +29,36 @@ public class Penguin : Animal
         Debug.Log($"{Name} says Honk!");
     }
 
-    public override void Produce()
+    public override string Produce()
     {
-       if (Happiness >= 70)
+        string logMessage = "";
+        int guanoRush = 0;
+        if (Hunger <= 20 && Happiness >= 50)
         {
-            guano += 2;
-            Debug.Log($"{Name} produced {guano} units of guano, Total guano is {guano}.");
-
+            guanoRush += 5;
         }
+
+        else if (Hunger <= 40 && Happiness >= 50)
+        {
+            guanoRush += 3;
+        }
+
+        else if (Hunger <= 50 && Happiness >= 50)
+        {
+            guanoRush = 1;
+        }
+
+        else
+        {
+            guanoRush = 0;
+            logMessage  = $"{Name} is not in the mood to produce guano. Total guano: {Guano}";
+            Debug.Log(logMessage);
+            return logMessage;
+        }
+
+        Guano += guanoRush;
+        logMessage = $"{Name} produced {guanoRush} units of guano, Total guano is {Guano} units.";      
+        Debug.Log(logMessage);
+        return logMessage;
     }
 }

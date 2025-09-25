@@ -36,13 +36,34 @@ public class Chicken : Animal
         GetStatus();
     }
 
-    public override void Produce()
+    public override string Produce()
     {
-        if (Happiness >= 70)
+        string logMessage = "";
+        int eggLaid;
+        if (Happiness > 80)
         {
-            Egg += 2;
-            Debug.Log($"{Name} laid {Egg} eggs, Total egg is {Egg}");
+            eggLaid = 3;
+          
         }
+
+        else if (Happiness >= 51)
+        {
+            eggLaid = 2;
+
+        }
+        else
+        {
+            eggLaid = 0;
+            logMessage = $"{Name} is not in the mood to lay egg. Total egg {Egg}";
+            Debug.Log(logMessage);
+            return logMessage;
+        }
+
+
+        Egg += eggLaid;
+        logMessage = $"{Name} laid {eggLaid} eggs, Total egg is {Egg} units.";
+        Debug.Log(logMessage);
+        return logMessage;
     }
 
 

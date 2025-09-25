@@ -6,13 +6,15 @@ public enum FoodType
     Hay,
     Grain,
     Fish,
+    RottenFood,
+    AnimalFood,
 }
 
 
 public abstract class Animal : MonoBehaviour
 {
-    private FoodType lastFoodFed = FoodType.Hay;
-    private int sameFoodCount = 0;
+  //  private FoodType lastFoodFed = FoodType.Hay;
+  //  private int sameFoodCount = 0;
     private string name;
     private int hunger;
     private int happiness;
@@ -86,39 +88,58 @@ public abstract class Animal : MonoBehaviour
 
     public virtual void Feed(FoodType foodType, int foodAmount)
     {
-        AdjustHunger(-foodAmount);
+        //โค้ดเช็คประเภทอาหาร
+        /*
         CheckSameFood(foodType);
-
         int favouriteFoodHappniessChange = 0;
         if (sameFoodCount > 2)
         {
-            AdjustHappiness(-foodAmount);      
+            favouriteFoodHappniessChange = 5;
+            AdjustHappiness(-favouriteFoodHappniessChange);      
             Debug.Log($"{Name} is fully content or too bored with {foodType}. Happiness will NOT increase.");
-        }
+        } */
+        AdjustHunger(-foodAmount);
+        int happinessIncrease = 0;
+        int happinessDecrease = 0;
         if (foodType == PreferredFood)
         {
-            favouriteFoodHappniessChange = foodAmount;
-            AdjustHappiness(favouriteFoodHappniessChange);
-            Debug.Log($"The happy animal receives its favorite food ({foodType}), name : {Name}, receives {foodAmount} units, its current Happiness is {Happiness}");
+            happinessIncrease = 15;
+            AdjustHappiness(happinessIncrease);
+            Debug.Log($"{Name} receives its favorite food: {foodType}, receives {foodAmount} units, its Happiness increase by {happinessIncrease}, its current Happiness is {Happiness}, Hunger is {Hunger}");
+        }
+
+        else if (foodType == FoodType.RottenFood)
+        {
+            happinessDecrease = 20;
+            AdjustHappiness(-happinessDecrease);
+            Debug.Log($"{Name} has suffered from {foodType}, resulting Happiness decrease by {happinessDecrease} , its current Happiness is {Happiness}, Hunger is {Hunger}");
+        }
+
+        else if (foodType == FoodType.AnimalFood)
+        {
+            Debug.Log($"You gave {Name} some food; it didn’t really like it, but it could eat it, its current Happiness is {Happiness}, Hunger is {Hunger}");
         }
 
         else
         {
-            favouriteFoodHappniessChange = -(foodAmount / 2);
-            AdjustHappiness(favouriteFoodHappniessChange);
-            Debug.Log($"The animal dislikes the food. The food name given is {foodType}, name : {Name}, receives {foodAmount} units, its Happiness decreases by {favouriteFoodHappniessChange},its current Happiness is {Happiness}");
+            happinessDecrease = 5;
+            AdjustHappiness(-happinessDecrease);
+            Debug.Log($"{Name} dislikes the food. The food given is {foodType}, receives {foodAmount} units, its Happiness decreases by {-happinessDecrease}, its current Happiness is {Happiness}, Hunger is {Hunger}");
         }
-
     }
+        
+
+    
 
     public void GetStatus()
     {
         Debug.Log($"Current {Name} status : Hunger = {Hunger} point , Happiness = {Happiness} point");
     }
 
-    public abstract void Produce();
+public abstract string Produce();
 
-    private void CheckSameFood(FoodType currentFood)
+    //โค้ดเช็คประเภทอาหาร
+ /*   private void CheckSameFood(FoodType currentFood)
     {
         if (currentFood == lastFoodFed)
         {
@@ -134,10 +155,10 @@ public abstract class Animal : MonoBehaviour
         {
             sameFoodCount = 1;
             lastFoodFed = currentFood;
-        }
+        } */
 
-    }
-}
+ }
+
 
 
 

@@ -38,13 +38,25 @@ public class Cow : Animal
 
     }
 
-    public override void Produce()
+    public override string Produce()
     {
-        if (Happiness >= 70)
+        string logMessage = "";
+        int milkProduced = 0;
+        if (Happiness > 70)
         {
-            Milk += 2;
-            
-            Debug.Log($"{Name} produces {Milk} liters of milk,Total milk is {Milk}");
+            milkProduced = Happiness / 10;
         }
+
+        else
+        {
+            logMessage = $"{Name} is not in the mood to produce milk. Total milk: {Milk}";
+            Debug.Log(logMessage);
+            return logMessage;
+        }
+
+
+        logMessage = $"{Name} produces {milkProduced} units.";
+        Debug.Log(logMessage);
+        return logMessage;
     }
 }
