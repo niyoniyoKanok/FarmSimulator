@@ -83,7 +83,7 @@ public abstract class Animal : MonoBehaviour
         AdjustHunger(-foodAmount);
         int happinessIncrease = foodAmount / 2;
         AdjustHappiness(happinessIncrease);
-        Debug.Log($"{Name} was fed {foodAmount} units of food.Happiness increased by {happinessIncrease} ");
+        Debug.Log($"{Name} was fed {foodAmount} units of generic food.Happiness increased by {happinessIncrease} , current Happiness is {Happiness} ");
     }
 
     public virtual void Feed(FoodType foodType, int foodAmount)
@@ -98,12 +98,12 @@ public abstract class Animal : MonoBehaviour
             AdjustHappiness(-favouriteFoodHappniessChange);      
             Debug.Log($"{Name} is fully content or too bored with {foodType}. Happiness will NOT increase.");
         } */
-        AdjustHunger(-foodAmount);
         int happinessIncrease = 0;
         int happinessDecrease = 0;
         if (foodType == PreferredFood)
         {
             happinessIncrease = 15;
+            AdjustHunger(-foodAmount);
             AdjustHappiness(happinessIncrease);
             Debug.Log($"{Name} receives its favorite food: {foodType}, receives {foodAmount} units, its Happiness increase by {happinessIncrease}, its current Happiness is {Happiness}, Hunger is {Hunger}");
         }
@@ -117,12 +117,16 @@ public abstract class Animal : MonoBehaviour
 
         else if (foodType == FoodType.AnimalFood)
         {
-            Debug.Log($"You gave {Name} some food; it didn’t really like it, but it could eat it, its current Happiness is {Happiness}, Hunger is {Hunger}");
+            happinessIncrease = foodAmount / 2;
+            AdjustHunger(-foodAmount);
+            AdjustHappiness(happinessIncrease);
+            Debug.Log($"You gave {Name} some food; it didn’t really like it, but it could eat it, resulting Happiness increase by {happinessIncrease}, its current Happiness is {Happiness}, Hunger is {Hunger}");
         }
 
         else
         {
             happinessDecrease = 5;
+            AdjustHunger(-foodAmount);
             AdjustHappiness(-happinessDecrease);
             Debug.Log($"{Name} dislikes the food. The food given is {foodType}, receives {foodAmount} units, its Happiness decreases by {-happinessDecrease}, its current Happiness is {Happiness}, Hunger is {Hunger}");
         }
@@ -133,7 +137,7 @@ public abstract class Animal : MonoBehaviour
 
     public void GetStatus()
     {
-        Debug.Log($"Current {Name} status : Hunger = {Hunger} point , Happiness = {Happiness} point");
+        Debug.Log($"{Name} status : Hunger = {Hunger} , Happiness = {Happiness} , Preferred Food = {PreferredFood}");
     }
 
 public abstract string Produce();

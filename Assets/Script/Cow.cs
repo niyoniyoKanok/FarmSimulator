@@ -41,10 +41,10 @@ public class Cow : Animal
     public override string Produce()
     {
         string logMessage = "";
-        int milkProduced = 0;
+        float milkProduced = 0;
         if (Happiness > 70)
         {
-            milkProduced = Happiness / 10;
+            milkProduced = (float)Happiness / 10.0f;
         }
 
         else

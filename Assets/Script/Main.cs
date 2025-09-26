@@ -21,30 +21,35 @@ public class Main : MonoBehaviour
         Debug.Log("Welcome to farm simulator!");
         Debug.Log($"There are {FarmAnimals.Count} animals living in the Happy Farm!");
 
-        penguin.Feed(FoodType.Fish, 10);
-        cow.Feed(FoodType.Hay, 10);
-        chicken.Feed(FoodType.Grain, 10);
-        cow.Feed(FoodType.Fish, 10);
+       foreach (var animal in FarmAnimals)
+        {
+            animal.GetStatus();
+        }
+        
         Debug.Log("");
-        penguin.Produce();
-        penguin.AdjustHunger(50);
-        penguin.GetStatus();
-        penguin.Produce();
-        penguin.AdjustHunger(-90);
-        penguin.GetStatus();
-        penguin.Produce();
+       foreach (var animal in FarmAnimals)
+        {
+            animal.MakeSound();
+            animal.Feed(5);
+        }
+    
         Debug.Log("");
-        cow.GetStatus();
-        cow.Feed(FoodType.RottenFood, 10);
-        cow.GetStatus();
-        chicken.Feed(FoodType.AnimalFood, 10);
-        chicken.GetStatus();
-        Debug.Log("");
+        cow.Feed(10);
+        chicken.Feed(FoodType.RottenFood,10);
+        chicken.Feed(FoodType.AnimalFood,10);
+        for (int i = 0; i < 3 ; i++) 
+        {
+            penguin.Feed(FoodType.Fish,20);
+            penguin.Produce();
+        }
 
-        cow.AdjustHappiness(-999); cow.AdjustHunger(-999);
+        cow.AdjustHappiness(-1000); cow.AdjustHunger(-1000);
         cow.GetStatus();
-        cow.AdjustHappiness(999); cow.AdjustHunger(999);
+        cow.AdjustHappiness(+1000); cow.AdjustHunger(+1000);
         cow.GetStatus();
+
+
+
 
     }
 }
